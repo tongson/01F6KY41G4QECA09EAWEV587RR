@@ -25,8 +25,9 @@ local remove = function(p)
 end
 
 app:match("/read/:id", function(self)
-	local t = read(self.params.id)
-	return { json = {} }
+	local j = read(self.params.id)
+	local t = from_json(j)
+	return { json = t }
 end)
 
 app:get("/delete", function(self)
