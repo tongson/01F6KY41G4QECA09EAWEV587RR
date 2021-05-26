@@ -10,7 +10,7 @@ local create = function()
 		title = "test 1",
 		description = "this is the first test",
 	}
-	local status, body = request(app, "/create", { post = "item="..json.encode(b) })
+	local status, body = request(app, "/create", { post = { item = json.encode(b) } })
 	expect(200)(status)
 end
 T["create"] = create
