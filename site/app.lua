@@ -30,7 +30,17 @@ app:match("/read/:id", function(self)
 	return { json = t }
 end)
 
-app:get("/delete", function(self)
+app:put("/delete/:id", function(self)
+	local t, p = pcall(read, self.params.id)
+	if t then
+		local t = from_json(p)
+		return { json = t }
+	else
+		return {
+			status = 404,
+			"not found!",
+		}
+	end
 end)
 
 app:post("/create", function(self)
