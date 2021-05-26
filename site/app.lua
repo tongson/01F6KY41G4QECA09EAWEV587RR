@@ -41,7 +41,7 @@ app:post("/create", function(self)
 	}
 end)
 app:post("/update/:id", function(self)
-	if read(self.params.id) then
+	if pcall(read, self.params.id) then
 		local t = from_json(self.params.item)
 		write(t.id, self.params.item)
 		return {
@@ -49,7 +49,8 @@ app:post("/update/:id", function(self)
 		}
 	else
 		return {
-			status = 440
+			status = 404,
+			"not found!",
 		}
 	end
 end)

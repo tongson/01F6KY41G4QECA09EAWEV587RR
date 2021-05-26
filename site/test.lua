@@ -38,7 +38,12 @@ local update = function()
 	expect("test updated")(j.title)
 	expect("this is the first test")(j.description)
 end
+local update_invalid = function()
+	local status, body = request(app, "/update/999", { post = { item = json.encode("a") } })
+	expect(404)(status)
+end
 T["create"] = create
 T["read"] = read
 T["update"] = update
+T["invalid update"] = update_invalid
 T.summary()
