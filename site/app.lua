@@ -40,8 +40,18 @@ app:post("/create", function(self)
 		json = t
 	}
 end)
-app:post("/update", function(self)
-	return {}
+app:post("/update/:id", function(self)
+	if read(self.params.id) then
+		local t = from_json(self.params.item)
+		write(t.id, self.params.item)
+		return {
+			json = t
+		}
+	else
+		return {
+			status = 440
+		}
+	end
 end)
 
 return app

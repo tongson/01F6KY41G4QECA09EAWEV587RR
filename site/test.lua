@@ -25,6 +25,20 @@ local read = function()
 	expect("test 1")(j.title)
 	expect("this is the first test")(j.description)
 end
+local update = function()
+	local b = {
+		id = 1,
+		title = "test updated",
+		description = "this is the first test",
+	}
+	local status, body = request(app, "/update/1", { post = { item = json.encode(b) } })
+	expect(200)(status)
+	local j = json.decode(body)
+	expect(1)(j.id)
+	expect("test updated")(j.title)
+	expect("this is the first test")(j.description)
+end
 T["create"] = create
 T["read"] = read
+T["update"] = update
 T.summary()
