@@ -12,6 +12,10 @@ local create = function()
 	}
 	local status, body = request(app, "/create", { post = { item = json.encode(b) } })
 	expect(200)(status)
+	local j = json.decode(body)
+	expect(1)(j.id)
+	expect("test 1")(j.title)
+	expect("this is the first test")(j.description)
 end
 T["create"] = create
 T.summary()

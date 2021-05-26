@@ -24,7 +24,8 @@ local remove = function(p)
 	return file
 end
 
-app:get("/read", function()
+app:match("/read/:id", function(self)
+	local t = read(self.params.id)
 	return { json = {} }
 end)
 
@@ -32,11 +33,10 @@ app:get("/delete", function(self)
 end)
 
 app:post("/create", function(self)
-	print(self.params)
 	local t = from_json(self.params.item)
 	write(t.id, self.params.item)
 	return {
-		json = { to_json(t) },
+		json = t
 	}
 end)
 app:post("/update", function(self)
