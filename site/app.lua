@@ -31,19 +31,14 @@ end)
 app:get("/delete", function(self)
 end)
 
-app:match(
-	"/create",
-	respond_to({
-		POST = function(self)
-			print(self.params)
-			local t = from_json(self.params.item)
-			write(t.id, self.params.item)
-			return {
-				json = { to_json(t) },
-			}
-		end,
-	})
-)
+app:post("/create", function(self)
+	print(self.params)
+	local t = from_json(self.params.item)
+	write(t.id, self.params.item)
+	return {
+		json = { to_json(t) },
+	}
+end)
 app:post("/update", function(self)
 	return {}
 end)
