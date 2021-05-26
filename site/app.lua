@@ -34,6 +34,7 @@ app:put("/delete/:id", function(self)
 	local t, p = pcall(read, self.params.id)
 	if t then
 		local t = from_json(p)
+		remove(self.params.id)
 		return { json = t }
 	else
 		return {
