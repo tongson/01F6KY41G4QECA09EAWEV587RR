@@ -6,7 +6,7 @@ local dir = "storage/"
 local capture_errors_json = require("lapis.application").capture_errors_json
 local respond_to = require("lapis.application").respond_to
 
-os.execute("mkdir " .. dir .. "2>/dev/null")
+os.execute("mkdir " .. dir .. " 2>/dev/null")
 local write = function(p, s)
 	local file = io.open(dir .. p, "w")
 	file:write(s)
